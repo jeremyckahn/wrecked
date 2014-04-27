@@ -1,14 +1,22 @@
 /*global require*/
-'use strict';
-
 require.config({
-  paths: {
+  baseUrl: './scripts'
+  ,paths: {
     underscore: '../bower_components/underscore/underscore'
   }
 });
 
 require([
 
-], function () {
+  'platformer'
 
+], function (
+
+  Platformer
+
+) {
+  'use strict';
+
+  var platformer = new Platformer(document.getElementById('game'));
+  console.log(window.platformer = platformer);
 });
