@@ -24,10 +24,9 @@ define([
     this.setupDOM();
     this.player = new Player(this);
   }
+  var fn = Game.prototype;
 
-  var proto = Game.prototype;
-
-  proto.setupDOM = function () {
+  fn.setupDOM = function () {
     _.extend(this.containerEl.style, {
       height: constants.VIEWPORT_HEIGHT + 'px'
       ,width: constants.VIEWPORT_WIDTH + 'px'
@@ -37,7 +36,7 @@ define([
   /**
    * @return {HTMLCanvasElement}
    */
-  proto.createCanvas = function () {
+  fn.createCanvas = function () {
     var canvas = document.createElement('canvas');
 
     _.extend(canvas.style, {
@@ -56,7 +55,7 @@ define([
   /**
    * @param {HTMLCanvasElement} canvas
    */
-  proto.injectCanvas = function (canvas) {
+  fn.injectCanvas = function (canvas) {
     this.containerEl.appendChild(canvas);
   };
 
