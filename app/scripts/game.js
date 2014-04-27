@@ -17,13 +17,13 @@ define([
    * @param {HTMLElement} containerEl
    * @constructor
    */
-  function Platformer (containerEl) {
+  function Game (containerEl) {
     this.containerEl = containerEl;
     this.setupDOM();
     this.createPlayerLayer();
   }
 
-  var proto = Platformer.prototype;
+  var proto = Game.prototype;
 
   proto.setupDOM = function () {
     _.extend(this.containerEl.style, {
@@ -64,5 +64,5 @@ define([
     this.containerEl.appendChild(canvas);
   };
 
-  return Platformer;
+  return Game;
 });

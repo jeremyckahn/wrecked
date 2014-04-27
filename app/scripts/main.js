@@ -8,15 +8,15 @@ require.config({
 
 require([
 
-  'platformer'
+  'game'
 
 ], function (
 
-  Platformer
+  Game
 
 ) {
   'use strict';
 
-  var platformer = new Platformer(document.getElementById('game'));
-  console.log(window.platformer = platformer);
+  var game = new Game(document.getElementById('game'));
+  console.log(window.game = game);
 });
