@@ -3,12 +3,14 @@ define([
   'underscore'
 
   ,'constants'
+  ,'actors/player'
 
 ], function (
 
   _
 
   ,constants
+  ,Player
 
 ) {
   'use strict';
@@ -20,7 +22,7 @@ define([
   function Game (containerEl) {
     this.containerEl = containerEl;
     this.setupDOM();
-    this.createPlayerLayer();
+    this.player = new Player(this);
   }
 
   var proto = Game.prototype;
@@ -30,12 +32,6 @@ define([
       height: constants.VIEWPORT_HEIGHT + 'px'
       ,width: constants.VIEWPORT_WIDTH + 'px'
     });
-  };
-
-  proto.createPlayerLayer = function () {
-    this.playerLayer = this.createCanvas();
-    this.playerLayer.classList.add('player');
-    this.injectCanvas(this.playerLayer);
   };
 
   /**
