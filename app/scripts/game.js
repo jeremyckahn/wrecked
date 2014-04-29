@@ -1,6 +1,7 @@
 define([
 
   'underscore'
+  ,'keydrown'
 
   ,'constants'
   ,'actors/player'
@@ -8,6 +9,7 @@ define([
 ], function (
 
   _
+  ,kd
 
   ,constants
   ,Player
@@ -25,6 +27,7 @@ define([
 
     this.setupDOM();
     this.player = new Player(this);
+    kd.run(this.tick.bind(this));
   }
   var fn = Game.prototype;
 
@@ -33,6 +36,14 @@ define([
       height: constants.VIEWPORT_HEIGHT + 'px'
       ,width: constants.VIEWPORT_WIDTH + 'px'
     });
+  };
+
+  /**
+   * Heartbeat method.  Gets called every frame.
+   */
+  fn.tick = function () {
+    kd.tick();
+    this.trigger('render');
   };
 
   /**
