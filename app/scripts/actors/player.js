@@ -1,10 +1,14 @@
 define([
 
-  'constants'
+  'keydrown'
+
+  ,'constants'
 
 ], function (
 
-  constants
+  kd
+
+  ,constants
 
 ) {
   'use strict';
@@ -19,7 +23,13 @@ define([
     this.layer.classList.add('player');
     this.layerContext = this.layer.getContext('2d');
     this.game.injectCanvas(this.layer);
+    this.x = 0;
+    this.y = 0;
+    this.velocity = 5;
+
     this.game.on('render', this.render, this);
+    kd.A.down(this.moveLeft.bind(this));
+    kd.D.down(this.moveRight.bind(this));
   }
   var fn = Player.prototype;
 
@@ -27,10 +37,18 @@ define([
     this.layer.width = this.layer.width;
     this.layerContext.fillStyle = constants.PLAYER_COLOR;
     this.layerContext.fillRect(
-        0,
-        0,
+        this.x,
+        this.y,
         constants.PLAYER_HEIGHT,
         constants.PLAYER_WIDTH);
+  };
+
+  fn.moveLeft = function () {
+    this.x -= this.velocity;
+  };
+
+  fn.moveRight = function () {
+    this.x += this.velocity;
   };
 
   return Player;
