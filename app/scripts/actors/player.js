@@ -19,7 +19,7 @@ define([
     this.layer.classList.add('player');
     this.layerContext = this.layer.getContext('2d');
     this.game.injectCanvas(this.layer);
-    this.render();
+    this.game.on('render', this.render, this);
   }
   var fn = Player.prototype;
 

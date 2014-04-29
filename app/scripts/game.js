@@ -21,6 +21,8 @@ define([
    */
   function Game (containerEl) {
     this.containerEl = containerEl;
+    this._events = {};
+
     this.setupDOM();
     this.player = new Player(this);
   }
@@ -57,6 +59,34 @@ define([
    */
   fn.injectCanvas = function (canvas) {
     this.containerEl.appendChild(canvas);
+  };
+
+  /**
+   * @param {string} event
+   * @param {Function} handler
+   * @param {Object} context
+   */
+  fn.on = function (event, handler, context) {
+    var events = this._events;
+    if (typeof events[event] === 'undefined') {
+      events[event] = [];
+    }
+
+    events[event].push({ handler: handler, context: context });
+  };
+
+  /**
+   * @param {string} event
+   */
+  fn.trigger = function (event) {
+    var events = this._events;
+    if (typeof events[event] === 'undefined') {
+      return;
+    }
+
+    events[event].forEach(function (eventObj) {
+      eventObj.handler.call(eventObj.context);
+    });
   };
 
   return Game;
