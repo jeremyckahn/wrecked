@@ -14,20 +14,20 @@ define([
   'use strict';
 
   /**
-   * @param {Game} game
+   * @param {Wrecked} wrecked
    * @constructor
    */
-  function Player (game) {
-    this.game = game;
-    this.layer = this.game.createCanvas();
+  function Player (wrecked) {
+    this.wrecked = wrecked;
+    this.layer = this.wrecked.createCanvas();
     this.layer.classList.add('player');
     this.layerContext = this.layer.getContext('2d');
-    this.game.injectCanvas(this.layer);
+    this.wrecked.injectCanvas(this.layer);
     this.x = 0;
     this.y = 0;
     this.velocity = 5;
 
-    this.game.on('render', this.render, this);
+    this.wrecked.on('render', this.render, this);
     kd.A.down(this.moveLeft.bind(this));
     kd.D.down(this.moveRight.bind(this));
   }

@@ -9,15 +9,15 @@ require.config({
 
 require([
 
-  'game'
+  'wrecked'
 
 ], function (
 
-  Game
+  Wrecked
 
 ) {
   'use strict';
 
-  var game = new Game(document.getElementById('game'));
-  console.log(window.game = game);
+  var wrecked = new Wrecked(document.getElementById('wrecked'));
+  console.log(window.wrecked = wrecked);
 });

@@ -21,7 +21,7 @@ define([
    * @param {HTMLElement} containerEl
    * @constructor
    */
-  function Game (containerEl) {
+  function Wrecked (containerEl) {
     this.containerEl = containerEl;
     this._events = {};
 
@@ -29,7 +29,7 @@ define([
     this.player = new Player(this);
     kd.run(this.tick.bind(this));
   }
-  var fn = Game.prototype;
+  var fn = Wrecked.prototype;
 
   fn.setupDOM = function () {
     _.extend(this.containerEl.style, {
@@ -100,5 +100,5 @@ define([
     });
   };
 
-  return Game;
+  return Wrecked;
 });

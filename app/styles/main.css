@@ -1,10 +1,10 @@
-#game {
+#wrecked {
   border: solid 1px #000;
   margin: 0 auto;
   position: relative;
 }
 
-#game canvas {
+#wrecked canvas {
   left: 0;
   position: absolute;
   top: 0;
