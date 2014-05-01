@@ -1,7 +1,7 @@
 {
   "generator-backbone": {
     "appPath": "app",
-    "appName": "Platformer",
+    "appName": "Wrecked",
     "coffee": false,
     "compassBootstrap": false,
     "includeRequireJS": true
