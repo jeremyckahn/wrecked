@@ -4,11 +4,15 @@ define([
 
   ,'constants'
 
+  ,'actors/actor'
+
 ], function (
 
   kd
 
   ,constants
+
+  ,Actor
 
 ) {
   'use strict';
@@ -16,9 +20,10 @@ define([
   /**
    * @param {Wrecked} wrecked
    * @constructor
+   * @extends {Actor}
    */
-  function Player (wrecked) {
-    this.wrecked = wrecked;
+  function Player () {
+    Actor.prototype.constructor.apply(this, arguments);
     this.layer = this.wrecked.createCanvas();
     this.layer.classList.add('player');
     this.layerContext = this.layer.getContext('2d');
@@ -27,11 +32,10 @@ define([
     this.y = 0;
     this.velocity = 5;
 
-    this.wrecked.on('render', this.render, this);
     kd.A.down(this.moveLeft.bind(this));
     kd.D.down(this.moveRight.bind(this));
   }
-  var fn = Player.prototype;
+  var fn = Player.prototype = Object.create(Actor.prototype);
 
   fn.render = function () {
     this.layer.width = this.layer.width;
@@ -41,14 +45,6 @@ define([
         this.y,
         constants.PLAYER_HEIGHT,
         constants.PLAYER_WIDTH);
-  };
-
-  fn.moveLeft = function () {
-    this.x -= this.velocity;
-  };
-
-  fn.moveRight = function () {
-    this.x += this.velocity;
   };
 
   return Player;
