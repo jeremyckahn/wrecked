@@ -24,10 +24,10 @@ define([
    */
   function Player () {
     Actor.apply(this, arguments);
-    this.layer = this.wrecked.createCanvas();
-    this.layer.classList.add('player');
-    this.layerContext = this.layer.getContext('2d');
-    this.wrecked.injectCanvas(this.layer);
+    this.context = this.wrecked.createCanvas();
+    this.context.classList.add('player');
+    this.canvasContext = this.context.getContext('2d');
+    this.wrecked.injectCanvas(this.context);
     this.x = 0;
     this.y = 0;
     this.velocity = 5;
@@ -38,10 +38,9 @@ define([
   var fn = Player.prototype = Object.create(Actor.prototype);
 
   fn.render = function () {
-    this.layer.width = this.layer.width;
-    this.layerContext.fillStyle = constants.PLAYER_COLOR;
+    this.clear();
+    this.canvasContext.fillStyle = constants.PLAYER_COLOR;
     this.fillRect(
-        this.layerContext,
         this.x,
         this.y,
         constants.PLAYER_HEIGHT,
