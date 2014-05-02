@@ -23,7 +23,7 @@ define([
    * @extends {Actor}
    */
   function Player () {
-    Actor.prototype.constructor.apply(this, arguments);
+    Actor.apply(this, arguments);
     this.layer = this.wrecked.createCanvas();
     this.layer.classList.add('player');
     this.layerContext = this.layer.getContext('2d');
@@ -40,7 +40,8 @@ define([
   fn.render = function () {
     this.layer.width = this.layer.width;
     this.layerContext.fillStyle = constants.PLAYER_COLOR;
-    this.layerContext.fillRect(
+    this.fillRect(
+        this.layerContext,
         this.x,
         this.y,
         constants.PLAYER_HEIGHT,
