@@ -75,15 +75,15 @@ define([
   /**
    * @param {string} event
    * @param {Function} handler
-   * @param {Object} context
+   * @param {Object} canvas
    */
-  fn.on = function (event, handler, context) {
+  fn.on = function (event, handler, canvas) {
     var events = this._events;
     if (typeof events[event] === 'undefined') {
       events[event] = [];
     }
 
-    events[event].push({ handler: handler, context: context });
+    events[event].push({ handler: handler, canvas: canvas });
   };
 
   /**
@@ -96,7 +96,7 @@ define([
     }
 
     events[event].forEach(function (eventObj) {
-      eventObj.handler.call(eventObj.context);
+      eventObj.handler.call(eventObj.canvas);
     });
   };
 
