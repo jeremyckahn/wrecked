@@ -47,25 +47,6 @@ define([
   };
 
   /**
-   * @return {HTMLCanvasElement}
-   */
-  fn.createCanvas = function () {
-    var canvas = document.createElement('canvas');
-
-    _.extend(canvas.style, {
-      height: constants.VIEWPORT_HEIGHT + 'px'
-      ,width: constants.VIEWPORT_WIDTH + 'px'
-    });
-
-    _.extend(canvas, {
-      height: constants.VIEWPORT_HEIGHT
-      ,width: constants.VIEWPORT_WIDTH
-    });
-
-    return canvas;
-  };
-
-  /**
    * @param {HTMLCanvasElement} canvas
    */
   fn.injectCanvas = function (canvas) {

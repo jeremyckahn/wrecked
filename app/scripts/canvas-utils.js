@@ -1,5 +1,17 @@
 /* jshint camelcase:false */
-define(function () {
+define([
+
+  'underscore'
+
+  ,'constants'
+
+], function (
+
+  _
+
+  ,constants
+
+) {
   'use strict';
 
   /**
@@ -16,12 +28,32 @@ define(function () {
    * @param {string=} opt_className
    */
   canvasUtils.createCanvas = function (opt_className) {
-    this.canvas = this.wrecked.createCanvas();
-    this.canvasContext = this.canvas.getContext('2d');
+    var canvas = document.createElement('canvas');
+
+    _.extend(canvas.style, {
+      height: constants.VIEWPORT_HEIGHT + 'px'
+      ,width: constants.VIEWPORT_WIDTH + 'px'
+    });
+
+    _.extend(canvas, {
+      height: constants.VIEWPORT_HEIGHT
+      ,width: constants.VIEWPORT_WIDTH
+    });
 
     if (opt_className) {
-      this.canvas.classList.add('player');
+      canvas.classList.add('player');
     }
+
+    this.canvas = canvas;
+    this.canvasContext = canvas.getContext('2d');
+  };
+
+  /**
+   * @param {number} y
+   * @return {number}
+   */
+  canvasUtils.transformYForScreen = function (y) {
+    return this.canvas.height - y;
   };
 
   canvasUtils.injectCanvas = function () {
@@ -39,7 +71,11 @@ define(function () {
    * @param {number} w
    */
   canvasUtils.fillRect = function (x, y, h, w) {
-    this.canvasContext.fillRect(x, y, h, w);
+    this.canvasContext.fillRect(
+        x,
+        this.transformYForScreen(y) - h,
+        h,
+        w);
   };
 
   /**
