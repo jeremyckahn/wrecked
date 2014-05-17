@@ -46,7 +46,9 @@ define([
   };
 
   fn.jump = function () {
-    this.velocityY = this.jumpPower;
+    if (this.y === 0) {
+      this.velocityY += this.jumpPower;
+    }
   };
 
   return Actor;
