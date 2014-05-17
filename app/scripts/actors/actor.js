@@ -27,7 +27,9 @@ define([
     _.defaults(this, {
       x: 0
       ,y: 0
-      ,velocityX: 5
+      ,speedX: 5
+      ,velocityY: 0
+      ,jumpPower: 75
     });
   }
   var fn = Actor.prototype = Object.create(canvasUtils);
@@ -36,11 +38,15 @@ define([
   fn.tick = utils.noop;
 
   fn.moveLeft = function () {
-    this.x -= this.velocityX;
+    this.x -= this.speedX;
   };
 
   fn.moveRight = function () {
-    this.x += this.velocityX;
+    this.x += this.speedX;
+  };
+
+  fn.jump = function () {
+    this.velocityY = this.jumpPower;
   };
 
   return Actor;

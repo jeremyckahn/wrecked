@@ -32,10 +32,11 @@ define([
     this.injectCanvas();
     this.x = 0;
     this.y = 200;
-    this.velocityX = 5;
+    this.speedX = 5;
 
     kd.A.down(this.moveLeft.bind(this));
     kd.D.down(this.moveRight.bind(this));
+    kd.SPACE.press(this.jump.bind(this));
 
     this.initGravity();
   }
