@@ -3,6 +3,8 @@ define([
   'keydrown'
 
   ,'constants'
+  ,'utils'
+  ,'mixins/gravity'
 
   ,'actors/actor'
 
@@ -11,6 +13,8 @@ define([
   kd
 
   ,constants
+  ,utils
+  ,gravity
 
   ,Actor
 
@@ -27,13 +31,17 @@ define([
     this.createCanvas('player');
     this.injectCanvas();
     this.x = 0;
-    this.y = 0;
+    this.y = 200;
     this.velocity = 5;
 
     kd.A.down(this.moveLeft.bind(this));
     kd.D.down(this.moveRight.bind(this));
+
+    this.initGravity();
   }
   var fn = Player.prototype = Object.create(Actor.prototype);
+
+  utils.mixin(fn, gravity);
 
   fn.render = function () {
     this.clear();
@@ -43,6 +51,10 @@ define([
         this.y,
         constants.PLAYER_HEIGHT,
         constants.PLAYER_WIDTH);
+  };
+
+  fn.tick = function () {
+    this.applyGravity();
   };
 
   return Player;

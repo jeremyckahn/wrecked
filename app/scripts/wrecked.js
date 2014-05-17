@@ -43,6 +43,7 @@ define([
    */
   fn.tick = function () {
     kd.tick();
+    this.trigger('tick');
     this.trigger('render');
   };
 

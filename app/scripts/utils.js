@@ -11,6 +11,8 @@ define([
 
   var utils = {};
 
+  utils.noop = function () {};
+
   /**
    * Safely console.warns something.  Takes an arbitrary number of arguments
    * with arbitrary types.
