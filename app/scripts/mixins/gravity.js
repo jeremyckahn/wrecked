@@ -24,13 +24,13 @@ define([
   };
 
   gravity.applyGravity = function () {
-    this.velocityY += constants.GRAVITATIONAL_ACCELERATION;
+    this.velocityY -= constants.GRAVITATIONAL_ACCELERATION;
 
-    if (this.velocityY > this.terminalVelocityY) {
-      this.velocityY = this.terminalVelocityY;
+    if (this.velocityY < -this.terminalVelocityY) {
+      this.velocityY = -this.terminalVelocityY;
     }
 
-    this.y -= this.velocityY;
+    this.y += this.velocityY;
 
     if (this.y < 0) {
       this.y = 0;
