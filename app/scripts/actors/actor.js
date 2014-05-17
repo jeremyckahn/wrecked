@@ -1,11 +1,15 @@
 define([
 
-  'canvas-utils'
+  'underscore'
+
+  ,'canvas-utils'
   ,'utils'
 
 ],function (
 
-  canvasUtils
+  _
+
+  ,canvasUtils
   ,utils
 
 ) {
@@ -19,6 +23,12 @@ define([
     this.wrecked = wrecked;
     this.wrecked.on('render', this.render, this);
     this.wrecked.on('tick', this.tick, this);
+
+    _.defaults(this, {
+      x: 0
+      ,y: 0
+      ,velocityX: 5
+    });
   }
   var fn = Actor.prototype = Object.create(canvasUtils);
 
@@ -26,11 +36,11 @@ define([
   fn.tick = utils.noop;
 
   fn.moveLeft = function () {
-    this.x -= this.velocity;
+    this.x -= this.velocityX;
   };
 
   fn.moveRight = function () {
-    this.x += this.velocity;
+    this.x += this.velocityX;
   };
 
   return Actor;

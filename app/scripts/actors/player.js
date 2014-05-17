@@ -32,7 +32,7 @@ define([
     this.injectCanvas();
     this.x = 0;
     this.y = 200;
-    this.velocity = 5;
+    this.velocityX = 5;
 
     kd.A.down(this.moveLeft.bind(this));
     kd.D.down(this.moveRight.bind(this));
