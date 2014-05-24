@@ -4,7 +4,8 @@
   "dependencies": {
     "underscore": "~1.6.0",
     "requirejs": "~2.1.10",
-    "keydrown": "~1.1.0"
+    "keydrown": "~1.1.0",
+    "requirejs-text": "~2.0.12"
   },
   "devDependencies": {}
 }

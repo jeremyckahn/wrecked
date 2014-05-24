@@ -3,6 +3,7 @@ require.config({
   baseUrl: './scripts'
   ,paths: {
     underscore: '../bower_components/underscore/underscore'
+    ,text: '../bower_components/requirejs-text/text'
     ,keydrown: '../bower_components/keydrown/dist/keydrown'
   }
 });
