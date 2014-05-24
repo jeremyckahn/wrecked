@@ -4,6 +4,7 @@ define([
   ,'keydrown'
 
   ,'constants'
+  ,'tile'
   ,'actors/player'
 
 ], function (
@@ -12,6 +13,7 @@ define([
   ,kd
 
   ,constants
+  ,Tile
   ,Player
 
 ) {
@@ -27,6 +29,7 @@ define([
 
     this.setupDOM();
     this.player = new Player(this);
+    this.tile = new Tile();
     kd.run(this.tick.bind(this));
   }
   var fn = Wrecked.prototype;
