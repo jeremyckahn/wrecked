@@ -4,6 +4,7 @@ define([
 
   ,'canvas-utils'
   ,'utils'
+  ,'mixins/collision'
 
 ],function (
 
@@ -11,6 +12,7 @@ define([
 
   ,canvasUtils
   ,utils
+  ,collision
 
 ) {
   'use strict';
@@ -31,11 +33,15 @@ define([
       ,velocityY: 0
       ,jumpPower: 75
     });
+
+    this.initCollision();
   }
   var fn = Actor.prototype = Object.create(canvasUtils);
+  utils.mixin(fn, collision);
 
-  /** @abstract */
-  fn.tick = utils.noop;
+  fn.tick = function () {
+    this.applyCollision();
+  };
 
   fn.moveLeft = function () {
     this.x -= this.speedX;

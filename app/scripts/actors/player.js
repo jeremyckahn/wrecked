@@ -56,6 +56,7 @@ define([
 
   fn.tick = function () {
     this.applyGravity();
+    Actor.prototype.tick.call(this);
   };
 
   return Player;
