@@ -36,7 +36,8 @@ define([
 
     this.initCollision();
   }
-  var fn = Actor.prototype = Object.create(canvasUtils);
+  var fn  = Actor.prototype;
+  utils.mixin(fn, canvasUtils);
   utils.mixin(fn, collision);
 
   fn.tick = function () {
