@@ -28,8 +28,8 @@ define([
     this._events = {};
 
     this.setupDOM();
+    this.tile = new Tile(this);
     this.player = new Player(this);
-    this.tile = new Tile();
     kd.run(this.tick.bind(this));
   }
   var fn = Wrecked.prototype;

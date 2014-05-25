@@ -13,7 +13,14 @@ define([
 ) {
   'use strict';
 
-  function Tile () {
+  /**
+   * @param {Wrecked} wrecked
+   * @constructor
+   */
+  function Tile (wrecked) {
+    this.wrecked = wrecked;
+    this.initCanvas('tile');
+    this.wrecked.injectCanvas(this.canvas);
     this._currentMap = '';
 
     this.map = {
