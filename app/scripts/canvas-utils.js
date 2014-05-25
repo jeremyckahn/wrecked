@@ -14,14 +14,6 @@ define([
 ) {
   'use strict';
 
-  /**
-   * All canvasUtils methods expect to be called by an Object with the
-   * following own properties:
-   *
-   * @param {Wrecked} wrecked
-   * @param {HTMLCanvasElement} canvas
-   * @param {CanvasRenderingContext2D} canvasContext
-   */
   var canvasUtils = {};
 
   /**
@@ -54,10 +46,6 @@ define([
    */
   canvasUtils.transformYForScreen = function (y) {
     return this.canvas.height - y;
-  };
-
-  canvasUtils.injectCanvas = function () {
-    this.wrecked.injectCanvas(this.canvas);
   };
 
   canvasUtils.clear = function () {
