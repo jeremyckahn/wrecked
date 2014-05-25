@@ -14,12 +14,12 @@ define([
 ) {
   'use strict';
 
-  var canvasUtils = {};
+  var canvas = {};
 
   /**
    * @param {string=} opt_className
    */
-  canvasUtils.createCanvas = function (opt_className) {
+  canvas.createCanvas = function (opt_className) {
     var canvas = document.createElement('canvas');
 
     _.extend(canvas.style, {
@@ -44,11 +44,11 @@ define([
    * @param {number} y
    * @return {number}
    */
-  canvasUtils.transformYForScreen = function (y) {
+  canvas.transformYForScreen = function (y) {
     return this.canvas.height - y;
   };
 
-  canvasUtils.clear = function () {
+  canvas.clear = function () {
     this.canvas.width = this.canvas.width;
   };
 
@@ -58,7 +58,7 @@ define([
    * @param {number} h
    * @param {number} w
    */
-  canvasUtils.fillRect = function (x, y, h, w) {
+  canvas.fillRect = function (x, y, h, w) {
     this.canvasContext.fillRect(
         x,
         this.transformYForScreen(y) - h,
@@ -69,9 +69,9 @@ define([
   /**
    * @param {string} fillStyle
    */
-  canvasUtils.fillStyle = function (fillStyle) {
+  canvas.fillStyle = function (fillStyle) {
     this.canvasContext.fillStyle = fillStyle;
   };
 
-  return canvasUtils;
+  return canvas;
 });

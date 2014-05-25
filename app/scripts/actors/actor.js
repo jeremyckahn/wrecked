@@ -2,16 +2,16 @@ define([
 
   'underscore'
 
-  ,'canvas-utils'
   ,'utils'
+  ,'mixins/canvas'
   ,'mixins/collision'
 
 ],function (
 
   _
 
-  ,canvasUtils
   ,utils
+  ,canvas
   ,collision
 
 ) {
@@ -37,7 +37,7 @@ define([
     this.initCollision();
   }
   var fn  = Actor.prototype;
-  utils.mixin(fn, canvasUtils);
+  utils.mixin(fn, canvas);
   utils.mixin(fn, collision);
 
   fn.tick = function () {

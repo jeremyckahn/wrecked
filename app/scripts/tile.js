@@ -1,19 +1,33 @@
 define([
 
-  'text!tiles/sandbox.json'
+  'utils'
+  ,'mixins/canvas'
+  ,'text!tiles/sandbox.json'
 
 ], function (
 
-  sandbox
+  utils
+  ,canvas
+  ,sandbox
 
 ) {
   'use strict';
 
-  function Tile () {}
-  var fn = Tile.prototype;
+  function Tile () {
+    this._currentMap = '';
 
-  fn.map = {
-    sandbox: JSON.parse(sandbox)
+    this.map = {
+      sandbox: JSON.parse(sandbox)
+    };
+  }
+  var fn = Tile.prototype;
+  utils.mixin(fn, canvas);
+
+  /**
+   * @param {string} mapName
+   */
+  fn.useMap = function (mapName) {
+    this._currentMap = mapName;
   };
 
   return Tile;
