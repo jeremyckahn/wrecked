@@ -50,8 +50,8 @@ define([
     this.fillRect(
         this.x,
         this.y,
-        constants.PLAYER_HEIGHT,
-        constants.PLAYER_WIDTH);
+        constants.PLAYER_WIDTH,
+        constants.PLAYER_HEIGHT);
   };
 
   fn.tick = function () {

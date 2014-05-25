@@ -55,15 +55,15 @@ define([
   /**
    * @param {number} x
    * @param {number} y
-   * @param {number} h
    * @param {number} w
+   * @param {number} h
    */
-  canvas.fillRect = function (x, y, h, w) {
+  canvas.fillRect = function (x, y, w, h) {
     this.canvasContext.fillRect(
         x,
         this.transformYForScreen(y) - h,
-        h,
-        w);
+        w,
+        h);
   };
 
   /**

@@ -31,6 +31,8 @@ define([
     this.tile = new Tile(this);
     this.player = new Player(this);
     kd.run(this.tick.bind(this));
+
+    this.tile.useMap('sandbox');
   }
   var fn = Wrecked.prototype;
 
