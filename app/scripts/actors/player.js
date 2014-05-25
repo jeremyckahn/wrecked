@@ -28,7 +28,7 @@ define([
    */
   function Player () {
     Actor.apply(this, arguments);
-    this.createCanvas('player');
+    this.initCanvas('player');
     this.wrecked.injectCanvas(this.canvas);
     this.x = 0;
     this.y = 200;

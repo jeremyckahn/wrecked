@@ -19,7 +19,7 @@ define([
   /**
    * @param {string=} opt_className
    */
-  canvas.createCanvas = function (opt_className) {
+  canvas.initCanvas = function (opt_className) {
     var canvas = document.createElement('canvas');
 
     _.extend(canvas.style, {
@@ -33,7 +33,7 @@ define([
     });
 
     if (opt_className) {
-      canvas.classList.add('player');
+      canvas.classList.add(opt_className);
     }
 
     this.canvas = canvas;
