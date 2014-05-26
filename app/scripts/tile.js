@@ -22,6 +22,7 @@ define([
     this.initCanvas('tile');
     this.wrecked.injectCanvas(this.canvas);
     this._currentMap = '';
+    this._tileObjects = [];
 
     this.map = {
       sandbox: JSON.parse(sandbox)
@@ -35,6 +36,7 @@ define([
    */
   fn.useMap = function (mapName) {
     this._currentMap = mapName;
+    this.createTileObjects();
     this.render();
   };
 
@@ -44,10 +46,27 @@ define([
     var tileHeight = currentMap.tileHeight;
     var tileWidth = currentMap.tileWidth;
 
+    this._tileObjects.forEach(function (tileObject) {
+      renderFunctionMap[tileObject.tile].call(
+          this, tileObject.x, tileObject.y, tileWidth, tileHeight);
+    }, this);
+  };
+
+  fn.createTileObjects = function () {
+    // Remove any old tiles
+    this._tileObjects.length = 0;
+
+    var currentMap = this.map[this._currentMap];
+    var tileHeight = currentMap.tileHeight;
+    var tileWidth = currentMap.tileWidth;
+
     currentMap.tileMap.reverse().forEach(function (row, y) {
       row.forEach(function (tile, x) {
-        renderFunctionMap[tile].call(
-            this, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+        this._tileObjects.push({
+          tile: tile
+          ,x: x * tileWidth
+          ,y: y * tileHeight
+        });
       }, this);
     }, this);
   };

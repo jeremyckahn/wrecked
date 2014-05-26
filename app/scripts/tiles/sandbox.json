@@ -8,5 +8,9 @@
 
   "tileWidth": 40,
 
-  "tileHeight": 40
+  "tileHeight": 40,
+
+  "1": {
+    "passable": false
+  }
 }
