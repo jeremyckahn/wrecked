@@ -1,17 +1,25 @@
 define([
 
-  'utils'
+  'underscore'
+
+  ,'utils'
   ,'mixins/canvas'
   ,'text!tiles/sandbox.json'
 
 ], function (
 
-  utils
+  _
+
+  ,utils
   ,canvas
   ,sandbox
 
 ) {
   'use strict';
+
+  var TILE_DEFAULT_ATTRIBUTES = {
+    passable: true
+  };
 
   /**
    * @param {Wrecked} wrecked
@@ -62,13 +70,27 @@ define([
 
     currentMap.tileMap.reverse().forEach(function (row, y) {
       row.forEach(function (tile, x) {
-        this._tileObjects.push({
+        var tileObject = {
           tile: tile
           ,x: x * tileWidth
           ,y: y * tileHeight
-        });
+          ,width: tileWidth
+          ,height: tileHeight
+        };
+
+        if (currentMap[tile]) {
+          _.defaults(tileObject, currentMap[tile]);
+        }
+
+        _.defaults(tileObject, TILE_DEFAULT_ATTRIBUTES);
+
+        this._tileObjects.push(tileObject);
       }, this);
     }, this);
+  };
+
+  fn.getImpassableTiles = function () {
+    return _.where(this._tileObjects, { passable: false });
   };
 
   var renderFunctionMap = {
