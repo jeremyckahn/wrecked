@@ -12,12 +12,21 @@ define([
   var collision = {};
 
   collision.initCollision = function () {
+    this._collisionList = [];
+
     _.defaults(this, {
       x: 0
       ,y: 0
       ,velocityX: 0
       ,velocityY: 0
     });
+  };
+
+  /**
+   * @param {Array.<Object>}objects
+   */
+  collision.addToCollisionList = function (objects) {
+    this._collisionList = this._collisionList.concat(objects);
   };
 
   collision.applyCollision = function () {

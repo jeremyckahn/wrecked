@@ -30,9 +30,11 @@ define([
     this.setupDOM();
     this.tile = new Tile(this);
     this.player = new Player(this);
-    kd.run(this.tick.bind(this));
 
     this.tile.useMap('sandbox');
+    this.player.addToCollisionList(this.tile.getImpassableTiles());
+
+    kd.run(this.tick.bind(this));
   }
   var fn = Wrecked.prototype;
 
