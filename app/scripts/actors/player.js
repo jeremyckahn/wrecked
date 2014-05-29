@@ -32,6 +32,8 @@ define([
     this.wrecked.injectCanvas(this.canvas);
     this.x = 0;
     this.y = 200;
+    this.width = constants.PLAYER_WIDTH;
+    this.height = constants.PLAYER_HEIGHT;
     this.speedX = 5;
 
     kd.A.down(this.moveLeft.bind(this));
@@ -50,8 +52,8 @@ define([
     this.fillRect(
         this.x,
         this.y,
-        constants.PLAYER_WIDTH,
-        constants.PLAYER_HEIGHT);
+        this.width,
+        this.height);
   };
 
   fn.tick = function () {
