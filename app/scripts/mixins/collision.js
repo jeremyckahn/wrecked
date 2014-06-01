@@ -88,6 +88,12 @@ define([
           continue;
         }
 
+        if (this.velocityY > 0) {
+          this.y = collidableObject.y - this.height;
+          this.velocityY = 0;
+          continue;
+        }
+
         if (this.velocityX > 0) {
           this.x = collidableObject.x - this.width;
           this.velocityX = 0;
