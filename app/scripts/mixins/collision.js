@@ -24,7 +24,7 @@ define([
 
   collision.applyCollision = function () {
     this._applyGroundCollision();
-    this._applyObjectCollision();
+    this._applyBlockCollision();
   };
 
   /**
@@ -35,22 +35,57 @@ define([
   };
 
   /**
+   * @param {number}
+   */
+  function isIntersecting (point, i1, i2) {
+    return (point > i1 && point < i2);
+  }
+
+  /**
    * @param {{height: number, width: number, x: number, y: number}} otherObject
    * @return {boolean}
    */
   collision.isColliding = function (otherObject) {
-    // http://gamedev.stackexchange.com/a/587
-    return (
-        Math.abs(this.x - otherObject.x) * 2
-            <= (this.width + otherObject.width)) &&
-       (Math.abs(this.y - otherObject.y) * 2
-            <= (this.height + otherObject.height));
+    return this.isCollidingHorizontally(otherObject) &&
+           this.isCollidingVertically(otherObject);
   };
 
-  collision._applyObjectCollision = function () {
+  /**
+   * @param {{height: number, width: number, x: number, y: number}} otherObject
+   * @return {boolean}
+   */
+  collision.isCollidingHorizontally = function (otherObject) {
+    var thisRight = this.x + this.width;
+    var otherObjectRight = otherObject.x + otherObject.width;
+    return (isIntersecting(thisRight, otherObject.x, otherObjectRight) ||
+        isIntersecting(this.x, otherObject.x, otherObjectRight));
+  };
+
+  /**
+   * @param {{height: number, width: number, x: number, y: number}} otherObject
+   * @return {boolean}
+   */
+  collision.isCollidingVertically = function (otherObject) {
+    var thisTop = this.y + this.height;
+    var otherObjectTop = otherObject.y + otherObject.height;
+    return (isIntersecting(thisTop, otherObject.y, otherObjectTop) ||
+        isIntersecting(this.y, otherObject.y, otherObjectTop));
+  };
+
+  // "Block collision" means that `this` cannot pass through the colliding
+  // object.
+  collision._applyBlockCollision = function () {
     this._collisionList.forEach(function (collidableObject) {
-      if (this.isColliding(collidableObject)) {
-        console.log('colliding');
+      while (this.isColliding(collidableObject)) {
+
+        var collidableObjectTop =
+            collidableObject.y + collidableObject.height;
+        if (this.isCollidingVertically(collidableObject) &&
+            this.velocityY < 0) {
+          this.y = collidableObjectTop;
+          this.velocityY = 0;
+          continue;
+        }
       }
     }, this);
   };
