@@ -62,9 +62,7 @@ define([
   };
 
   fn.jump = function () {
-    if (this.y === 0) {
-      this.velocityY += this.jumpPower;
-    }
+    this.velocityY += this.jumpPower;
   };
 
   return Actor;

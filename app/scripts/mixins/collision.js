@@ -57,8 +57,10 @@ define([
   collision.isCollidingHorizontally = function (otherObject) {
     var thisRight = this.x + this.width;
     var otherObjectRight = otherObject.x + otherObject.width;
-    return (isIntersecting(thisRight, otherObject.x, otherObjectRight) ||
-        isIntersecting(this.x, otherObject.x, otherObjectRight));
+
+    return ((isIntersecting(thisRight, otherObject.x, otherObjectRight) ||
+        isIntersecting(this.x, otherObject.x, otherObjectRight)) || (
+          this.x <= otherObject.x && thisRight >= otherObjectRight));
   };
 
   /**
@@ -68,8 +70,10 @@ define([
   collision.isCollidingVertically = function (otherObject) {
     var thisTop = this.y + this.height;
     var otherObjectTop = otherObject.y + otherObject.height;
-    return (isIntersecting(thisTop, otherObject.y, otherObjectTop) ||
-        isIntersecting(this.y, otherObject.y, otherObjectTop));
+
+    return ((isIntersecting(thisTop, otherObject.y, otherObjectTop) ||
+        isIntersecting(this.y, otherObject.y, otherObjectTop)) || (
+          this.y <= otherObject.y && thisTop >= otherObjectTop));
   };
 
   // "Block collision" means that `this` cannot pass through the colliding
@@ -78,14 +82,24 @@ define([
     this._collisionList.forEach(function (collidableObject) {
       while (this.isColliding(collidableObject)) {
 
-        var collidableObjectTop =
-            collidableObject.y + collidableObject.height;
-        if (this.isCollidingVertically(collidableObject) &&
-            this.velocityY < 0) {
-          this.y = collidableObjectTop;
+        if (this.velocityY < 0) {
+          this.y = collidableObject.y + collidableObject.height;
           this.velocityY = 0;
           continue;
         }
+
+        if (this.velocityX > 0) {
+          this.x = collidableObject.x - this.width;
+          this.velocityX = 0;
+          continue;
+        }
+
+        if (this.velocityX < 0) {
+          this.x = collidableObject.x + collidableObject.width;
+          this.velocityX = 0;
+          continue;
+        }
+
       }
     }, this);
   };
